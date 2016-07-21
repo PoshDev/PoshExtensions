@@ -251,3 +251,24 @@ extension String {
         })
     }
 }
+
+extension UInt {
+    // http://stackoverflow.com/questions/3312935/nsnumberformatter-and-th-st-nd-rd-ordinal-number-endings
+    var shortOrdinal: String {
+        let ones = self % 10;
+        let tens = (self / 10) % 10;
+        let suffix: String
+        if tens == 1 {
+            suffix = "th";
+        } else if ones == 1 {
+            suffix = "st";
+        } else if ones == 2 {
+            suffix = "nd";
+        } else if ones == 3 {
+            suffix = "rd";
+        } else {
+            suffix = "th";
+        }
+        return String(format: "%d%@", self, suffix)
+    }
+}
