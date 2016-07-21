@@ -250,6 +250,20 @@ extension String {
             }
         })
     }
+
+    // Extracts the first capture group from the string so long as the entire string matches the regex
+    // i.e.  NSRegularExpression(pattern: "^(\\d*\\.?\\d*)%?$", options: [.CaseInsensitive])
+    //       would extract "5.43" from "$5.43"
+    func extractMatch(regex: NSRegularExpression) -> String? {
+        let result = regex.firstMatchInString(self, options: NSMatchingOptions(rawValue: 0), range: NSRange(location: 0, length: self.characters.count))
+        let capturedRange = result!.rangeAtIndex(1)
+        if !NSEqualRanges(capturedRange, NSMakeRange(NSNotFound, 0)) {
+            let theResult = (self as NSString).substringWithRange(result!.rangeAtIndex(1))
+            return theResult
+        } else {
+            return nil
+        }
+    }
 }
 
 extension UInt {
