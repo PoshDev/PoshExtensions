@@ -22,6 +22,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import UIKit
+import CoreLocation
 
 // MARK: - Hex Representation of Color -
 
@@ -34,35 +35,6 @@ extension UIColor {
             blue: CGFloat(hexValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
-    }
-
-    // slightly darkened colors
-
-
-    func colorByDarkeningWithValue(value: CGFloat) -> UIColor {
-
-        let numberOfComponenets = CGColorGetNumberOfComponents(self.CGColor)
-        let isGreyscale = numberOfComponenets == 2
-
-        let oldComponents = CGColorGetComponents(self.CGColor)
-        var newComponents: [CGFloat] = [0.0, 0.0, 0.0, 0.0]
-
-        if isGreyscale {
-            newComponents[0] = oldComponents[0] - value < 0.0 ? 0.0 : oldComponents[0] - value
-            newComponents[1] = oldComponents[0] - value < 0.0 ? 0.0 : oldComponents[0] - value
-            newComponents[2] = oldComponents[0] - value < 0.0 ? 0.0 : oldComponents[0] - value
-            newComponents[3] = oldComponents[1];
-        } else {
-            newComponents[0] = oldComponents[0] - value < 0.0 ? 0.0 : oldComponents[0] - value
-            newComponents[1] = oldComponents[1] - value < 0.0 ? 0.0 : oldComponents[1] - value
-            newComponents[2] = oldComponents[2] - value < 0.0 ? 0.0 : oldComponents[2] - value
-            newComponents[3] = oldComponents[3]
-        }
-
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let newColor = CGColorCreate(colorSpace, newComponents)
-
-        return UIColor(CGColor: newColor!)
     }
 }
 
@@ -95,6 +67,20 @@ extension UIView {
 
     func addCenterYConstraintsToView(view: UIView, offset: CGFloat) {
         self.addConstraint(NSLayoutConstraint(item: self, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1.0, constant: -offset))
+    }
+
+    // pin to all subviews
+
+    func pinSubviewToAllEdges(subview: UIView) {
+
+        subview.translatesAutoresizingMaskIntoConstraints = false
+
+        let left = NSLayoutConstraint(item: self, attribute: .Left, relatedBy: .Equal, toItem: subview, attribute: .Left, multiplier: 1.0, constant: 0.0)
+        let right = NSLayoutConstraint(item: self, attribute: .Right, relatedBy: .Equal, toItem: subview, attribute: .Right, multiplier: 1.0, constant: 0.0)
+        let top = NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: subview, attribute: .Top, multiplier: 1.0, constant: 0.0)
+        let bottom = NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: subview, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
+
+        self.addConstraints([left, right, top, bottom])
     }
 
     // Height and Width
@@ -266,6 +252,61 @@ extension String {
     }
 }
 
+extension Array {
+
+    mutating func appendAsQueueWithLength(newElement: Element, length: Int) {
+        if self.count < length {
+            self.append(newElement)
+        } else {
+            self.removeFirst()
+            self.append(newElement)
+        }
+        assert(self.count <= length)
+    }
+}
+
+// Calculates the average value of all elements in array
+extension _ArrayType where Generator.Element == Double {
+
+    func getAverage() -> Double {
+        var average: Double = 0.0
+        self.forEach({average += $0})
+        return average / Double(self.count)
+    }
+}
+
+extension CLLocationManager {
+    func enableBackgroundLocation() {
+        if #available(iOS 9.0, *) {
+            self.allowsBackgroundLocationUpdates = true
+        } else {
+            // background location enabled by default
+        }
+    }
+}
+
+extension UITextField {
+
+    func applyAttributedPlaceHolderForTextField() {
+        let attributedPlaceholder = NSMutableAttributedString()
+        let attributedText = NSMutableAttributedString(string: self.placeholder ?? "", attributes: [NSForegroundColorAttributeName : UIColor.lightGrayColor()])
+        attributedPlaceholder.appendAttributedString(attributedText)
+        self.attributedPlaceholder = attributedPlaceholder
+    }
+}
+
+// Extension to get last n elements of array
+extension CollectionType {
+    func last(count:Int) -> [Self.Generator.Element] {
+        let selfCount = self.count as! Int
+        if selfCount <= count - 1 {
+            return Array(self)
+        } else {
+            return Array(self.reverse()[0...count - 1].reverse())
+        }
+    }
+}
+
 extension UInt {
     // http://stackoverflow.com/questions/3312935/nsnumberformatter-and-th-st-nd-rd-ordinal-number-endings
     var shortOrdinal: String {
@@ -285,4 +326,40 @@ extension UInt {
         }
         return String(format: "%d%@", self, suffix)
     }
+}
+
+extension UITableViewCell {
+
+    // regulatory
+    static var nib: UINib {
+        let className = self.className
+        return UINib(nibName: className, bundle: NSBundle.mainBundle())
+    }
+
+    static var cellReuseIdentifier: String {
+        return self.className
+    }
+
+    static var className: String {
+        return self.classForCoder().description().componentsSeparatedByString(".")[1]
+    }
+    
+}
+
+extension UICollectionViewCell {
+
+    // regulatory
+    static var nib: UINib {
+        let className = self.className
+        return UINib(nibName: className, bundle: NSBundle.mainBundle())
+    }
+
+    static var cellReuseIdentifier: String {
+        return self.className
+    }
+
+    static var className: String {
+        return self.classForCoder().description().componentsSeparatedByString(".")[1]
+    }
+    
 }
