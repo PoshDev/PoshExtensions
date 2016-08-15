@@ -275,6 +275,15 @@ extension _ArrayType where Generator.Element == Double {
     }
 }
 
+extension _ArrayType where Generator.Element == Int {
+
+    func getAverage() -> Int {
+        var average: Double = 0.0
+        self.forEach({average += Double($0)})
+        return Int(round(average / Double(self.count)))
+    }
+}
+
 extension CLLocationManager {
     func enableBackgroundLocation() {
         if #available(iOS 9.0, *) {
