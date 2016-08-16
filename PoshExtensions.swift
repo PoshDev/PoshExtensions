@@ -298,7 +298,7 @@ extension UITextField {
 
     func applyAttributedPlaceHolderForTextField() {
         let attributedPlaceholder = NSMutableAttributedString()
-        let attributedText = NSMutableAttributedString(string: self.placeholder ?? "", attributes: [NSForegroundColorAttributeName : UIColor.lightGrayColor()])
+        let attributedText = NSMutableAttributedString(string: self.placeholder ?? "", attributes: [NSForegroundColorAttributeName : UIColor.lightGrayColor(), NSFontAttributeName : self.font ?? UIFont.systemFontOfSize(17.0)])
         attributedPlaceholder.appendAttributedString(attributedText)
         self.attributedPlaceholder = attributedPlaceholder
     }
