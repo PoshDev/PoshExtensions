@@ -69,6 +69,28 @@ extension UIView {
         self.addConstraint(NSLayoutConstraint(item: self, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1.0, constant: -offset))
     }
 
+    // sides
+
+    func addTopConstraintToView(view: UIView) {
+        let top = NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1.0, constant: 0.0)
+        self.addConstraint(top)
+    }
+
+    func addBottomConstraintToView(view: UIView) {
+        let bottom = NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
+        self.addConstraint(bottom)
+    }
+
+    func addLeftConstraintToView(view: UIView) {
+        let left = NSLayoutConstraint(item: self, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1.0, constant: 0.0)
+        self.addConstraint(left)
+    }
+
+    func addRightConstraintToView(view: UIView) {
+        let right = NSLayoutConstraint(item: self, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1.0, constant: 0.0)
+        self.addConstraint(right)
+    }
+
     // pin to all subviews
 
     func pinSubviewToAllEdges(subview: UIView) {
