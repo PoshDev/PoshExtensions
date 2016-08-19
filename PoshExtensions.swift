@@ -372,3 +372,21 @@ extension UICollectionViewCell {
     }
     
 }
+
+extension UITableViewHeaderFooterView {
+
+    // regulatory
+    static var nib: UINib {
+        let className = self.className
+        return UINib(nibName: className, bundle: NSBundle.mainBundle())
+    }
+
+    static var cellReuseIdentifier: String {
+        return self.className
+    }
+
+    static var className: String {
+        return self.classForCoder().description().componentsSeparatedByString(".")[1]
+    }
+    
+}
