@@ -330,9 +330,22 @@ extension UITextField {
 extension CollectionType {
     func last(count:Int) -> [Self.Generator.Element] {
         let selfCount = self.count as! Int
+
+        if selfCount == 0 {
+            return []
+        }
+
+        if count == 0 {
+            return []
+        }
+
         if selfCount <= count - 1 {
             return Array(self)
         } else {
+            if count == 1 {
+                Array(self).last
+            }
+
             return Array(self.reverse()[0...count - 1].reverse())
         }
     }
