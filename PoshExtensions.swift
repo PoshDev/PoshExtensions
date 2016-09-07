@@ -425,3 +425,13 @@ extension UITableViewHeaderFooterView {
     }
     
 }
+
+extension UIViewController {
+
+    func replaceRootViewController(withViewController viewController: UIViewController) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.window?.rootViewController = viewController
+        appDelegate.window?.makeKeyAndVisible()
+    }
+
+}
