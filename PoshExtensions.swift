@@ -43,101 +43,101 @@ extension UIColor {
 
 extension UIView {
 
-    func applyShadowWithColor(color: UIColor) {
-        self.layer.shadowColor = color.CGColor
+    func applyShadowWithColor(_ color: UIColor) {
+        self.layer.shadowColor = color.cgColor
         self.layer.masksToBounds = false;
-        self.layer.shadowOffset = CGSizeMake(1, 2);
+        self.layer.shadowOffset = CGSize(width: 1, height: 2);
         self.layer.shadowRadius = 2;
         self.layer.shadowOpacity = 0.25;
     }
 
     // CenterX and CenterY
 
-    func addCenterXConstraintsToView(view: UIView) {
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1.0, constant: 0.0))
+    func addCenterXConstraintsToView(_ view: UIView) {
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0.0))
     }
 
-    func addCenterYConstraintsToView(view: UIView) {
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
+    func addCenterYConstraintsToView(_ view: UIView) {
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1.0, constant: 0.0))
     }
 
-    func addCenterXConstraintsToView(view: UIView, offset: CGFloat) {
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1.0, constant: -offset))
+    func addCenterXConstraintsToView(_ view: UIView, offset: CGFloat) {
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: -offset))
     }
 
-    func addCenterYConstraintsToView(view: UIView, offset: CGFloat) {
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1.0, constant: -offset))
+    func addCenterYConstraintsToView(_ view: UIView, offset: CGFloat) {
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1.0, constant: -offset))
     }
 
     // sides
 
-    func addTopConstraintToView(view: UIView) {
-        let top = NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1.0, constant: 0.0)
+    func addTopConstraintToView(_ view: UIView) {
+        let top = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0.0)
         self.addConstraint(top)
     }
 
-    func addBottomConstraintToView(view: UIView) {
-        let bottom = NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
+    func addBottomConstraintToView(_ view: UIView) {
+        let bottom = NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0.0)
         self.addConstraint(bottom)
     }
 
-    func addLeftConstraintToView(view: UIView) {
-        let left = NSLayoutConstraint(item: self, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1.0, constant: 0.0)
+    func addLeftConstraintToView(_ view: UIView) {
+        let left = NSLayoutConstraint(item: self, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1.0, constant: 0.0)
         self.addConstraint(left)
     }
 
-    func addRightConstraintToView(view: UIView) {
-        let right = NSLayoutConstraint(item: self, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1.0, constant: 0.0)
+    func addRightConstraintToView(_ view: UIView) {
+        let right = NSLayoutConstraint(item: self, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1.0, constant: 0.0)
         self.addConstraint(right)
     }
 
     // pin to all subviews
 
-    func pinSubviewToAllEdges(subview: UIView) {
+    func pinSubviewToAllEdges(_ subview: UIView) {
 
         subview.translatesAutoresizingMaskIntoConstraints = false
 
-        let left = NSLayoutConstraint(item: self, attribute: .Left, relatedBy: .Equal, toItem: subview, attribute: .Left, multiplier: 1.0, constant: 0.0)
-        let right = NSLayoutConstraint(item: self, attribute: .Right, relatedBy: .Equal, toItem: subview, attribute: .Right, multiplier: 1.0, constant: 0.0)
-        let top = NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: subview, attribute: .Top, multiplier: 1.0, constant: 0.0)
-        let bottom = NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: subview, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
+        let left = NSLayoutConstraint(item: self, attribute: .left, relatedBy: .equal, toItem: subview, attribute: .left, multiplier: 1.0, constant: 0.0)
+        let right = NSLayoutConstraint(item: self, attribute: .right, relatedBy: .equal, toItem: subview, attribute: .right, multiplier: 1.0, constant: 0.0)
+        let top = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: subview, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let bottom = NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: subview, attribute: .bottom, multiplier: 1.0, constant: 0.0)
 
         self.addConstraints([left, right, top, bottom])
     }
 
     // Height and Width
 
-    func addHeightConstraintToView(view: UIView, value: CGFloat) {
-        self.addConstraint(NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: value))
+    func addHeightConstraintToView(_ view: UIView, value: CGFloat) {
+        self.addConstraint(NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: value))
     }
 
-    func addWidthConstraintToView(view: UIView, value: CGFloat) {
-        self.addConstraint(NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: value))
+    func addWidthConstraintToView(_ view: UIView, value: CGFloat) {
+        self.addConstraint(NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: value))
     }
 
     // Equal Width and Height
 
-    func addEqualHeightsConstraintsToViews(views: [UIView]) {
-        for (i, view) in views.enumerate() {
+    func addEqualHeightsConstraintsToViews(_ views: [UIView]) {
+        for (i, view) in views.enumerated() {
             if i < views.count - 1 {
-                self.addConstraint(NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: views[i + 1], attribute: .Height, multiplier: 1.0, constant: 0.0))
+                self.addConstraint(NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: views[i + 1], attribute: .height, multiplier: 1.0, constant: 0.0))
             }
         }
     }
 
-    func addEqualWidthConstraintsToViews(views: [UIView]) {
-        for (i, view) in views.enumerate() {
+    func addEqualWidthConstraintsToViews(_ views: [UIView]) {
+        for (i, view) in views.enumerated() {
             if i < views.count - 1 {
-                self.addConstraint(NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: views[i + 1], attribute: .Width, multiplier: 1.0, constant: 0.0))
+                self.addConstraint(NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: views[i + 1], attribute: .width, multiplier: 1.0, constant: 0.0))
             }
         }
     }
 
     // Visual Format
 
-    func addConstraintsWithFormatStrings(strings: [String], views: [String : UIView]) {
+    func addConstraintsWithFormatStrings(_ strings: [String], views: [String : UIView]) {
         for string in strings {
-            self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(string, options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
+            self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: string, options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
         }
     }
 }
@@ -146,100 +146,100 @@ extension UIImage {
 
     // image Stetching
 
-    class func stretchableImageFromImage(image: UIImage, capInsets: UIEdgeInsets) -> UIImage {
-        return image.resizableImageWithCapInsets(capInsets, resizingMode: .Stretch)
+    class func stretchableImageFromImage(_ image: UIImage, capInsets: UIEdgeInsets) -> UIImage {
+        return image.resizableImage(withCapInsets: capInsets, resizingMode: .stretch)
     }
 
     // recoloring
 
-    class func recoloredImageFromImage(image: UIImage, newColor: UIColor) -> UIImage {
+    class func recoloredImageFromImage(_ image: UIImage, newColor: UIColor) -> UIImage {
 
-        let imageRect = CGRect(origin: CGPointZero, size: image.size)
+        let imageRect = CGRect(origin: CGPoint.zero, size: image.size)
 
         //////// Begin ////////
         UIGraphicsBeginImageContextWithOptions(imageRect.size, false, image.scale)
 
         let context = UIGraphicsGetCurrentContext()
 
-        CGContextScaleCTM(context, 1.0, -1.0)
-        CGContextTranslateCTM(context, 0, -(imageRect.size.height))
+        context?.scaleBy(x: 1.0, y: -1.0)
+        context?.translateBy(x: 0, y: -(imageRect.size.height))
 
-        CGContextClipToMask(context, imageRect, image.CGImage)
-        CGContextSetFillColorWithColor(context, newColor.CGColor)
-        CGContextFillRect(context, imageRect)
+        context?.clip(to: imageRect, mask: image.cgImage!)
+        context?.setFillColor(newColor.cgColor)
+        context?.fill(imageRect)
 
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
 
         UIGraphicsEndImageContext()
         ///////// End /////////
 
-        return newImage
+        return newImage!
     }
 }
 
-extension NSDate {
+extension Date {
 
     // returns date in form: Ex: Nov 27, 3:32 PM
     func currentTimeStampString() -> String {
-        let formatter = NSDateFormatter()
-        formatter.locale = NSLocale(localeIdentifier: "en_US")
-        formatter.dateStyle = .MediumStyle
-        formatter.timeStyle = .ShortStyle
-        return formatter.stringFromDate(self)
+        let formatter = DateFormatter()
+        formatter.locale = NSLocale(localeIdentifier: "en_US") as Locale!
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter.string(from: self)
     }
 
     // TODO: test this?
     // returns the time if within the last day, 'Yesterday' if made yesterday, a MM/DD/YY is before that or future
     func readableLocalTimestamp() -> String {
 
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeStyle = .ShortStyle
-        dateFormatter.dateStyle = .ShortStyle
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .short
         dateFormatter.doesRelativeDateFormatting = true
 
-        var dateString = dateFormatter.stringFromDate(self)
+        var dateString = dateFormatter.string(from: self)
 
         print(dateString)
         if dateString.localizedCaseInsensitiveContainsString("yesterday") {
             dateString = "Yesterday"
         } else if dateString.localizedCaseInsensitiveContainsString("today") {
-            dateString.removeRange(dateString.rangeOfString("Today, ")!)
+            dateString.removeSubrange(dateString.range(of: "Today, ")!)
         } else {
             // remove the time
-            let newFormatter = NSDateFormatter()
-            newFormatter.timeStyle = .NoStyle
-            newFormatter.dateStyle = .ShortStyle
-            dateString = newFormatter.stringFromDate(self)
+            let newFormatter = DateFormatter()
+            newFormatter.timeStyle = .none
+            newFormatter.dateStyle = .short
+            dateString = newFormatter.string(from: self)
             print("new dateString: \(dateString)")
         }
         return dateString
     }
 
-    func roundedUpDay() -> NSDate {
-        let calendar  = NSCalendar.currentCalendar()
-        let units: NSCalendarUnit = [NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day]
-        let components = calendar.components(units, fromDate: self)
+    func roundedUpDay() -> Date {
+        let calendar  = NSCalendar.currents
+        let units: Calendar.Component = [Calendar.Component.year, Calendar.Component.monthSymbols, Calendar.Component.firstWeekday]
+        let components = calendar.components(units, from: self)
         components.day += 1
-        return calendar.dateFromComponents(components)!
+        return calendar.date(from: components)!
     }
 
-    func roundedDownDay() -> NSDate {
-        let calendar  = NSCalendar.currentCalendar()
-        let units: NSCalendarUnit = [NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day]
-        let components = calendar.components(units, fromDate: self)
-        return calendar.dateFromComponents(components)!
+    func roundedDownDay() -> Date {
+        let calendar  = NSCalendar.current
+        let units: Calendar = [Calendar.year, Calendar.monthSymbols, Calendar.firstWeekday]
+        let components = (calendar as NSCalendar).components(units, from: self)
+        return calendar.date(from: components)!
     }
 }
 
 extension String {
     var nullIfEmpty: String? {
-        let trimmed = self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let trimmed = self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         return trimmed.characters.count == 0 ? nil : trimmed
     }
 
-    static func commaSeparatedList(list: [String], conjunction: String = "and", oxfordComma: Bool = true) -> String {
+    static func commaSeparatedList(_ list: [String], conjunction: String = "and", oxfordComma: Bool = true) -> String {
         print(list.count)
-        return list.enumerate().reduce("", combine: { (lhs: String, rhs: (Int, String)) -> String in
+        return list.enumerated().reduce("", { (lhs: String, rhs: (Int, String)) -> String in
             let (rhsIndex, rhsString) = rhs
             if lhs.characters.count == 0 {
                 return rhsString
@@ -262,11 +262,11 @@ extension String {
     // Extracts the first capture group from the string so long as the entire string matches the regex
     // i.e.  NSRegularExpression(pattern: "^(\\d*\\.?\\d*)%?$", options: [.CaseInsensitive])
     //       would extract "5.43" from "$5.43"
-    func extractMatch(regex: NSRegularExpression) -> String? {
-        let result = regex.firstMatchInString(self, options: NSMatchingOptions(rawValue: 0), range: NSRange(location: 0, length: self.characters.count))
-        let capturedRange = result!.rangeAtIndex(1)
+    func extractMatch(_ regex: NSRegularExpression) -> String? {
+        let result = regex.firstMatch(in: self, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSRange(location: 0, length: self.characters.count))
+        let capturedRange = result!.rangeAt(1)
         if !NSEqualRanges(capturedRange, NSMakeRange(NSNotFound, 0)) {
-            let theResult = (self as NSString).substringWithRange(result!.rangeAtIndex(1))
+            let theResult = (self as NSString).substring(with: result!.rangeAt(1))
             return theResult
         } else {
             return nil
@@ -276,7 +276,7 @@ extension String {
 
 extension Array {
 
-    mutating func appendAsQueueWithLength(newElement: Element, length: Int) {
+    mutating func appendAsQueueWithLength(_ newElement: Element, length: Int) {
         if self.count < length {
             self.append(newElement)
         } else {
@@ -288,23 +288,23 @@ extension Array {
 }
 
 // Calculates the average value of all elements in array
-extension _ArrayType where Generator.Element == Double {
-
-    func getAverage() -> Double {
-        var average: Double = 0.0
-        self.forEach({average += $0})
-        return average / Double(self.count)
-    }
-}
-
-extension _ArrayType where Generator.Element == Int {
-
-    func getAverage() -> Int {
-        var average: Double = 0.0
-        self.forEach({average += Double($0)})
-        return Int(round(average / Double(self.count)))
-    }
-}
+//extension _ArrayType where Iterator.Element == Double {
+//
+//    func getAverage() -> Double {
+//        var average: Double = 0.0
+//        self.forEach({average += $0})
+//        return average / Double(self.count)
+//    }
+//}
+//
+//extension _ArrayType where Iterator.Element == Int {
+//
+//    func getAverage() -> Int {
+//        var average: Double = 0.0
+//        self.forEach({average += Double($0)})
+//        return Int(round(average / Double(self.count)))
+//    }
+//}
 
 extension CLLocationManager {
     func enableBackgroundLocation() {
@@ -320,15 +320,15 @@ extension UITextField {
 
     func applyAttributedPlaceHolderForTextField() {
         let attributedPlaceholder = NSMutableAttributedString()
-        let attributedText = NSMutableAttributedString(string: self.placeholder ?? "", attributes: [NSForegroundColorAttributeName : UIColor.lightGrayColor(), NSFontAttributeName : self.font ?? UIFont.systemFontOfSize(17.0)])
-        attributedPlaceholder.appendAttributedString(attributedText)
+        let attributedText = NSMutableAttributedString(string: self.placeholder ?? "", attributes: [NSForegroundColorAttributeName : UIColor.lightGray, NSFontAttributeName : self.font ?? UIFont.systemFont(ofSize: 17.0)])
+        attributedPlaceholder.append(attributedText)
         self.attributedPlaceholder = attributedPlaceholder
     }
 }
 
 // Extension to get last n elements of array
-extension CollectionType {
-    func last(count:Int) -> [Self.Generator.Element] {
+extension Collection {
+    func last(_ count:Int) -> [Self.Iterator.Element] {
         let selfCount = self.count as! Int
 
         if selfCount == 0 {
@@ -346,7 +346,7 @@ extension CollectionType {
                 Array(self).last
             }
 
-            return Array(self.reverse()[0...count - 1].reverse())
+            return Array(self.reversed()[0...count - 1].reversed())
         }
     }
 }
@@ -377,7 +377,7 @@ extension UITableViewCell {
     // regulatory
     static var nib: UINib {
         let className = self.className
-        return UINib(nibName: className, bundle: NSBundle.mainBundle())
+        return UINib(nibName: className, bundle: Bundle.main)
     }
 
     static var cellReuseIdentifier: String {
@@ -385,7 +385,7 @@ extension UITableViewCell {
     }
 
     static var className: String {
-        return self.classForCoder().description().componentsSeparatedByString(".")[1]
+        return self.classForCoder().description().components(separatedBy: ".")[1]
     }
     
 }
@@ -395,7 +395,7 @@ extension UICollectionViewCell {
     // regulatory
     static var nib: UINib {
         let className = self.className
-        return UINib(nibName: className, bundle: NSBundle.mainBundle())
+        return UINib(nibName: className, bundle: Bundle.main)
     }
 
     static var cellReuseIdentifier: String {
@@ -403,7 +403,7 @@ extension UICollectionViewCell {
     }
 
     static var className: String {
-        return self.classForCoder().description().componentsSeparatedByString(".")[1]
+        return self.classForCoder().description().components(separatedBy: ".")[1]
     }
     
 }
@@ -413,7 +413,7 @@ extension UITableViewHeaderFooterView {
     // regulatory
     static var nib: UINib {
         let className = self.className
-        return UINib(nibName: className, bundle: NSBundle.mainBundle())
+        return UINib(nibName: className, bundle: Bundle.main)
     }
 
     static var cellReuseIdentifier: String {
@@ -421,7 +421,7 @@ extension UITableViewHeaderFooterView {
     }
 
     static var className: String {
-        return self.classForCoder().description().componentsSeparatedByString(".")[1]
+        return self.classForCoder().description().components(separatedBy: ".")[1]
     }
     
 }
