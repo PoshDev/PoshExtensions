@@ -36,6 +36,35 @@ extension UIColor {
             alpha: CGFloat(1.0)
         )
     }
+
+    // slightly darkened colors
+
+
+    func colorByDarkeningWithValue(value: CGFloat) -> UIColor {
+
+        let numberOfComponenets = CGColorGetNumberOfComponents(self.CGColor)
+        let isGreyscale = numberOfComponenets == 2
+
+        let oldComponents = CGColorGetComponents(self.CGColor)
+        var newComponents: [CGFloat] = [0.0, 0.0, 0.0, 0.0]
+
+        if isGreyscale {
+            newComponents[0] = oldComponents[0] - value < 0.0 ? 0.0 : oldComponents[0] - value
+            newComponents[1] = oldComponents[0] - value < 0.0 ? 0.0 : oldComponents[0] - value
+            newComponents[2] = oldComponents[0] - value < 0.0 ? 0.0 : oldComponents[0] - value
+            newComponents[3] = oldComponents[1];
+        } else {
+            newComponents[0] = oldComponents[0] - value < 0.0 ? 0.0 : oldComponents[0] - value
+            newComponents[1] = oldComponents[1] - value < 0.0 ? 0.0 : oldComponents[1] - value
+            newComponents[2] = oldComponents[2] - value < 0.0 ? 0.0 : oldComponents[2] - value
+            newComponents[3] = oldComponents[3]
+        }
+
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let newColor = CGColorCreate(colorSpace, newComponents)
+
+        return UIColor(CGColor: newColor!)
+    }
 }
 
 
@@ -203,7 +232,10 @@ extension NSDate {
         if dateString.localizedCaseInsensitiveContainsString("yesterday") {
             dateString = "Yesterday"
         } else if dateString.localizedCaseInsensitiveContainsString("today") {
-            dateString.removeRange(dateString.rangeOfString("Today, ")!)
+            //dateString.removeRange(dateString.rangeOfString("Today, ")!)
+            let newFormatter = NSDateFormatter()
+            newFormatter.timeStyle = .ShortStyle
+            dateString = newFormatter.stringFromDate(self)
         } else {
             // remove the time
             let newFormatter = NSDateFormatter()
